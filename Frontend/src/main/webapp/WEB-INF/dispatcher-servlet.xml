@@ -16,10 +16,7 @@
    http://www.springframework.org/schema/webflow-config
     http://www.springframework.org/schema/webflow-config/spring-webflow-config.xsd 
    ">
-	<context:component-scan
-		base-package="com.project" />
 	
-	<!-- back end -->
 	<context:component-scan
 		base-package="com.project" />
 

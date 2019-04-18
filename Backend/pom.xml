@@ -15,7 +15,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<spring.version>5.1.5.RELEASE</spring.version>
 		<hibernate.version>5.2.7.Final</hibernate.version>
-
 	</properties>
 
 	<dependencies>
@@ -48,7 +47,7 @@
 		</dependency>
 
 		<!--spring for file uplode and etc -->
-		
+
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-web</artifactId>
@@ -146,7 +145,6 @@
 			<artifactId>hibernate-validator</artifactId>
 			<version>5.4.1.Final</version>
 		</dependency>
-
 
 	</dependencies>
 	<build>

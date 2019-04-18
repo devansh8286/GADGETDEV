@@ -26,7 +26,7 @@ public class DatabaseConfig {
 	private final static String DATABASE_PASSWORD = "";
 
 	
-	@Bean
+	@Bean("dataSource")
 	public DataSource getDataSource() {
 		BasicDataSource dataSource = new BasicDataSource();
 		// database connection information
