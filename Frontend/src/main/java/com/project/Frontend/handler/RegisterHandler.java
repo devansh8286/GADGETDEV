@@ -4,6 +4,7 @@ package com.project.Frontend.handler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.binding.message.MessageBuilder;
 import org.springframework.binding.message.MessageContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import com.project.Backend.DAO.UserDAO;
@@ -17,7 +18,9 @@ public class RegisterHandler {
 
 	@Autowired
 	private UserDAO userDAO;
-	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+
 	public RegisterModel init() {
 		return new RegisterModel();
 	}
@@ -31,43 +34,34 @@ public class RegisterHandler {
 		registerModel.setBilling(billing);
 	}
 
-	
-	public String validateUser(User user,MessageContext error) {
-		
-		String transitionValue="success";
+	public String validateUser(User user, MessageContext error) {
+
+		String transitionValue = "success";
 		// checking for confirmpassword
-		
-		if(!(user.getPassword()).equals(user.getConfirmPassword())) {
-			
-			error.addMessage(new MessageBuilder()
-					.error()
-					.source("confirmPassword")
-					.defaultText("passsword does not match")
-					.build());
-			
-			transitionValue ="failure";
-		}
-		
-	//checking for unique or not existing email
-		
-		if(userDAO.getByEmail(user.getEmail())!=null) {
 
-			
-			error.addMessage(new MessageBuilder()
-					.error()
-					.source("email")
-					.defaultText("this email is alredy exist")
-					.build());
-			
-			transitionValue ="failure";
+		if (!(user.getPassword()).equals(user.getConfirmPassword())) {
+
+			error.addMessage(new MessageBuilder().error().source("confirmPassword")
+					.defaultText("passsword does not match").build());
+
+			transitionValue = "failure";
+		}
+
+		// checking for unique or not existing email
+
+		if (userDAO.getByEmail(user.getEmail()) != null) {
+
+			error.addMessage(
+					new MessageBuilder().error().source("email").defaultText("this email is alredy exist").build());
+
+			transitionValue = "failure";
 
 		}
-		
+
 		return transitionValue;
-		
+
 	}
-	
-	
+
 	public String saveAll(RegisterModel model) {
 		String transitionValue = "success";
 
@@ -78,16 +72,21 @@ public class RegisterHandler {
 			cart.setUser(user);
 			user.setCart(cart);
 		}
-//save User 
+
+		// encode the password
+
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
+
+		// save User
 		userDAO.addUser(user);
-		//get the address
-		Address billing =model.getBilling();
+		// get the address
+		Address billing = model.getBilling();
 		billing.setUserId(user.getId());
-		
+
 		billing.setBilling(true);
-		
+
 		userDAO.addAddresss(billing);
-		
+
 		return transitionValue;
 	}
 }
