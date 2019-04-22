@@ -1,8 +1,14 @@
 package com.project.Frontend.controller;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,25 +24,23 @@ import com.project.Frontend.exception.ProductNotFoundException;
 @Controller
 public class PageController {
 
-	private static final Logger logger=LoggerFactory.getLogger(PageController.class);
-	
+	private static final Logger logger = LoggerFactory.getLogger(PageController.class);
+
 	@Autowired
 	private CategoryDAO categoryDAO;
 
-	
 	@Autowired
 	private ProductDAO productDAO;
-	
-	
+
 	@RequestMapping(value = { "/", "/index", "/home" })
 	public ModelAndView index() {
 		ModelAndView mv = new ModelAndView("page");
 		mv.addObject("title", "Home");
-	
+
 		logger.info("inside PageController -INFO");
 
 		logger.debug("inside PageController -Debug");
-	
+
 		// passing list of category
 		mv.addObject("categories", categoryDAO.CList());
 
@@ -91,44 +95,44 @@ public class PageController {
 		return mv;
 	}
 
-	
-
-	//For viewing a single Product
-	@RequestMapping(value="/show/{id}/product") 
+	// For viewing a single Product
+	@RequestMapping(value = "/show/{id}/product")
 	public ModelAndView showSingleProduct(@PathVariable int id) throws ProductNotFoundException {
-		ModelAndView mv=new ModelAndView("page");
-		Product product=productDAO.get(id);
-		if(product == null) throw new ProductNotFoundException(); 
-		//update the view Count
-		product.setViews(product.getViews()+1);
+		ModelAndView mv = new ModelAndView("page");
+		Product product = productDAO.get(id);
+		if (product == null)
+			throw new ProductNotFoundException();
+		// update the view Count
+		product.setViews(product.getViews() + 1);
 		productDAO.update(product);
 //		----------------------------------
-		
-		mv.addObject("title",product.getName());
-		mv.addObject("product",product);
-		mv.addObject("userClickShowProduct",true);
+
+		mv.addObject("title", product.getName());
+		mv.addObject("product", product);
+		mv.addObject("userClickShowProduct", true);
 		return mv;
 	}
 
-	
 //	Login
-	
-	
+
 	@RequestMapping(value = "/login")
-	public ModelAndView login(@RequestParam(name="error",required=false) String error) {
+	public ModelAndView login(@RequestParam(name = "error", required = false) String error,
+			@RequestParam(name = "logout", required = false) String logout) {
+
 		ModelAndView mv = new ModelAndView("login");
-		if(error!=null) {
-			mv.addObject("messege", "Inavalid User name And  password");
+		if (error != null) {
+			mv.addObject("message", "Inavalid User name And  password");
 		}
-		
-		
+		if (logout != null) {
+			mv.addObject("logout","Logout Successfully" );
+		}
+
 		mv.addObject("title", "Login");
 		return mv;
 	}
 
-	
-	//access-denied page
-	
+	// access-denied page
+
 	@RequestMapping(value = "/access-denied")
 	public ModelAndView accessDenied() {
 		ModelAndView mv = new ModelAndView("error");
@@ -138,11 +142,17 @@ public class PageController {
 		return mv;
 	}
 
+	// Logout
+	@RequestMapping(value = "/perfom-logout")
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
 
+		// fetch the authentication
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+
+		return "redirect:/login?logout";
+	}
 
 }
-
-
-
-
-

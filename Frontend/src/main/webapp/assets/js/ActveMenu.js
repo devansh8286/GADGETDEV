@@ -120,12 +120,21 @@ if ($table.length) {
 
 								} else {
 
+									if(userRole=='ADMIN'){
+
+										str += '<a href="'
+											+ window.contextRoot
+											+ '/manage/'
+											+ data
+											+ '/product" ><button type="button" class="fa fa-edit fa-2x""></button></a>';
+
+									}else{
 									str += '<a href="'
 											+ window.contextRoot
 											+ '/cart/add/'
 											+ data
-											+ '/product" ><button type="button" class="fas fa-shopping-cart fa-2x""></button></a>';
-
+											+ '/product" ><button type="button" class="fa fa-cart-plus fa-2x""></button></a>';
+									}
 								}
 
 								return str;

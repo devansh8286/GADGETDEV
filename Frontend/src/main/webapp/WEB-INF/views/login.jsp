@@ -93,82 +93,95 @@
 
 
 
-	
+
 
 
 	<div class="row">
 
 
-<div class="container">
+		<div class="container">
 
-		<!-- this will display if user name or password is wrong -->
+			<!-- this will display if user name or password is wrong -->
 
-		<c:if test="${not empty message }">
+			<c:if test="${not empty message }">
+
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+
+						<div class="alert alert-danger">${message}</div>
+					</div>
+
+
+				</div>
+			</c:if>
+
+			<!-- this will display if user Logged out -->
+
+			<c:if test="${not empty logout }">
+
+				<div class="row">
+					<div class="col-md-offset-3 col-md-6">
+
+						<div class="alert alert-success"> ${logout}</div>
+					</div>
+
+
+				</div>
+			</c:if>
+
+
 
 			<div class="row">
 				<div class="col-md-offset-3 col-md-6">
 
-					<div class="alert alert-danger">${message}</div>
-				</div>
+					<div class="panel panel-primary">
 
-
-			</div>
-		</c:if>
-
-	</div>
-
-
-
-		<div class="col-md-offset-3 col-md-6">
-
-			<div class="panel panel-primary">
-
-				<div class="panel-heading">
-					<h4>Login</h4>
-				</div>
-
-				<div class="panel-body">
-					<form action="${contextRoot}/login" method="POST"
-						class="form-horizontal" id="loginForm">
-						<div class="form-group">
-							<label for="username" class="col-md-4 control-label">Email:
-							</label>
-							<div class="col-md-8">
-								<input type="text" name="username" id="username"
-									class="form-control" />
-							</div>
+						<div class="panel-heading">
+							<h4>Login</h4>
 						</div>
-						<div class="form-group">
-							<label for="password" class="col-md-4 control-label">Password:
-							</label>
-							<div class="col-md-8">
-								<input type="password" name="password" id="password"
-									class="form-control" />
-							</div>
+
+						<div class="panel-body">
+							<form action="${contextRoot}/login" method="POST"
+								class="form-horizontal" id="loginForm">
+								<div class="form-group">
+									<label for="username" class="col-md-4 control-label">Email:
+									</label>
+									<div class="col-md-8">
+										<input type="text" name="username" id="username"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="password" class="col-md-4 control-label">Password:
+									</label>
+									<div class="col-md-8">
+										<input type="password" name="password" id="password"
+											class="form-control" />
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-md-offset-4 col-md-8">
+										<input type="hidden" name="${_csrf.parameterName}"
+											value="${_csrf.token}" /> <input type="submit" value="Login"
+											class="btn btn-primary" />
+									</div>
+								</div>
+							</form>
 						</div>
-						<div class="form-group">
-							<div class="col-md-offset-4 col-md-8">
-								<input type="hidden" name="${_csrf.parameterName}"
-									value="${_csrf.token}" /> <input type="submit" value="Login"
-									class="btn btn-primary" />
-							</div>
-						</div>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-	<!-- footeR -->
+		<!-- footeR -->
 
-	<%@include file="Footer.jsp"%>
+		<%@include file="Footer.jsp"%>
 
-	<!-- bootbox -->
+		<!-- bootbox -->
 
-	<script src="${js }/bootbox.min.js"></script>
+		<script src="${js }/bootbox.min.js"></script>
 
 
-	<!-- self coded     -->
-	<script src="${js}/ActveMenu.js"></script>
-
+		<!-- self coded     -->
+		<script src="${js}/ActveMenu.js"></script>
 </body>
 </html>

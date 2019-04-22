@@ -4,13 +4,15 @@
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
-        https://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/security
-        https://www.springframework.org/schema/security/spring-security.xsd
-        
-        http://www.springframework.org/schema/context
-        https://www.springframework.org/schema/context/spring-context.xsd
-       ">
+		http://www.springframework.org/schema/beans/spring-beans.xsd
+		
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security.xsd
+		
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context.xsd">
+
+
 
 	<context:component-scan
 		base-package="com.project" />
@@ -19,25 +21,18 @@
 		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
 
 	<http pattern="/Resources/**" security="none" />
-
-
 	<http>
 		<!-- only admin access -->
 		<intercept-url pattern="/manage/**"
 			access="hasAuthority('ADMIN')" />
-
-		<!-- only user -->
+		<!-- only user access (who is registered) -->
 		<intercept-url pattern="/cart/**"
 			access="hasAuthority('USER')" />
-
-		<!-- FOR ALL -->
+		<!-- rest of the world -->
 		<intercept-url pattern="/**" access="permitAll" />
-
 		<form-login login-page="/login" />
 		<access-denied-handler
 			error-page="/access-denied" />
-		<logout />
-
 	</http>
 
 	<authentication-manager>
