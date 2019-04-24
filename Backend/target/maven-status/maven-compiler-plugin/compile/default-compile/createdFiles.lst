@@ -3,7 +3,9 @@ com\project\Backend\Config\DatabaseConfig.class
 com\project\Backend\DAO\CategoryDAO.class
 com\project\Backend\Model\User.class
 com\project\Backend\Model\Address.class
+com\project\Backend\Model\CartLine.class
 com\project\Backend\App.class
+com\project\Backend\DAOImpl\CartLineDAOImpl.class
 com\project\Backend\Model\Category.class
 com\project\Backend\DAOImpl\UserDAOImpl.class
 com\project\Backend\DAOImpl\ProductDAOImpl.class
@@ -11,3 +13,4 @@ com\project\Backend\Model\Product.class
 com\project\Backend\DAOImpl\CategoryDAOImpl.class
 com\project\Backend\DAO\UserDAO.class
 com\project\Backend\DAO\ProductDAO.class
+com\project\Backend\DAO\CartLineDAO.class

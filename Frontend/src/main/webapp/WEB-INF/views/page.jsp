@@ -2,7 +2,8 @@
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%@taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
+<%@taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 <spring:url var="css" value="/Resources/css" />
 
 <spring:url var="js" value="/Resources/js" />
@@ -80,6 +81,9 @@
 <link href="${css }/my.css" rel="stylesheet">
 
 <link href="${css }/toggle.css" rel="stylesheet">
+
+<link href="${css }/Cart.css" rel="stylesheet">
+
 </head>
 
 <body>
@@ -124,6 +128,12 @@
 
 	<c:if test="${userClickManageProducts==true}">
 		<%@include file="manageProduct.jsp"%>
+	</c:if>
+
+	<!-- user click to cart -->
+	
+	<c:if test="${userClickShowCart==true}">
+		<%@include file="cart.jsp"%>
 	</c:if>
 
 

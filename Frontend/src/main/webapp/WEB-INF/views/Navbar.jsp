@@ -36,14 +36,14 @@
 				</security:authorize>
 
 				<security:authorize access="isAuthenticated()">
-					<li class="nav-item dropdown"><a
+					<li class="nav-item dropdown" id="userCart"><a
 						class="nav-link dropdown-toggle" data-toggle="dropdown"
 						href="javascript:void(0)" role="button" aria-haspopup="true"
 						aria-expanded="false"> ${userModel.fullName}</a>
 						<div class="dropdown-menu">
 
 							<security:authorize access="hasAuthority('USER')">
-								<a class="dropdown-item" href="${contextRoot}/cart"> <span
+								<a class="dropdown-item" href="${contextRoot}/cart/show"> <span
 									class="fas fa-luggage-cart"></span> <span
 									class="badge badge-light"> ${userModel.cart.cartLines}</span>
 									-&#8377;${userModel.cart.grandTotal}

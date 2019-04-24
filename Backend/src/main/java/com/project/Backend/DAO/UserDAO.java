@@ -22,7 +22,6 @@ public interface UserDAO {
 //	
 //	List<Address> listShiipingAddress(User user);
 //	
-	boolean updateCart(Cart cart);
 	
 	User getByEmail(String email);
 }

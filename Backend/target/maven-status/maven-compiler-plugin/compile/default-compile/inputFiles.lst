@@ -4,10 +4,13 @@ G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAO\CategoryDAO
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Model\Category.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Model\Address.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\App.java
+G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAO\CartLineDAO.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAO\ProductDAO.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAOImpl\CategoryDAOImpl.java
+G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Model\CartLine.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Config\DatabaseConfig.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Model\Product.java
+G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAOImpl\CartLineDAOImpl.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\Model\User.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAOImpl\ProductDAOImpl.java
 G:\GADGETDEV\GADGETDEV\Backend\src\main\java\com\project\Backend\DAOImpl\UserDAOImpl.java

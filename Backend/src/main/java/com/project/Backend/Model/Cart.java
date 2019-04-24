@@ -23,8 +23,9 @@ public class Cart implements Serializable {
 	@OneToOne
 	private User user;
 	//----------------------
+	@Column(name="GRAND_TOTAL")
 	private double grandTotal;
-	@Column(name = "cart_line")
+	@Column(name = "cart_lines")
 	private int cartLines;
 
 	
