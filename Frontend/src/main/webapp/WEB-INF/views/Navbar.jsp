@@ -44,9 +44,9 @@
 
 							<security:authorize access="hasAuthority('USER')">
 								<a class="dropdown-item" href="${contextRoot}/cart/show"> <span
-									class="fas fa-luggage-cart"></span> <span
-									class="badge badge-light"> ${userModel.cart.cartLines}</span>
-									-&#8377;${userModel.cart.grandTotal}
+									class="fas fa-luggage-cart fa-spin"></span> <span
+									class="badge badge-info"> ${userModel.cart.cartLines}</span>
+									- &#8377;${userModel.cart.grandTotal}
 
 								</a>
 								<div role="separator" class="dropdown-divider"></div>

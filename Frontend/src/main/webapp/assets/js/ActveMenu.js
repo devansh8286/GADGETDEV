@@ -123,20 +123,20 @@ if ($table.length) {
 
 								} else {
 
-									if(userRole=='ADMIN'){
+									if (userRole == 'ADMIN') {
 
 										str += '<a href="'
-											+ window.contextRoot
-											+ '/manage/'
-											+ data
-											+ '/product" ><button type="button" class="fa fa-edit fa-2x""></button></a>';
+												+ window.contextRoot
+												+ '/manage/'
+												+ data
+												+ '/product" ><button type="button" class="fa fa-edit fa-2x""></button></a>';
 
-									}else{
-									str += '<a href="'
-											+ window.contextRoot
-											+ '/cart/add/'
-											+ data
-											+ '/product" ><button type="button" class="fa fa-cart-plus fa-2x""></button></a>';
+									} else {
+										str += '<a href="'
+												+ window.contextRoot
+												+ '/cart/add/'
+												+ data
+												+ '/product" ><button type="button" class="fa fa-cart-plus fa-2x""></button></a>';
 									}
 								}
 
@@ -413,5 +413,57 @@ if ((token != undefined && header != undefined)
 		xhr.setRequestHeader(header, token);
 	});
 }
-//------------------------------------------------------------------
+// ------------------------------------------------------------------
+
+// -----handling click event of refresh cart Button-------------------
+
+$('button[name="refreshCart"]')
+		.click(
+				function() {
+
+					// fetch the cart Line id
+					var cartLineId = $(this).attr('value');
+					var countElement = $('#count_' + cartLineId);
+
+					var originalCount = countElement.attr('value');
+					var currentCount = countElement.val();
+
+					// work only when Count has is changed
+
+					if (currentCount !== originalCount) {
+
+						// console.log("Current count :"+currentCount);
+						// console.log("original count :"+originalCount);
+
+						if (currentCount < 1 || currentCount > 5) {
+
+							// reverting back to the original count
+							// user has given value below 1 and above 5
+							countElement.val(originalCount);
+							bootbox
+									.alert({
+
+										size : 'medium',
+										title : 'check count',
+										message : 'product count should be minimum 1 and maximum 5!! '
+
+									});
+
+						} else {
+
+							var updateUrl = window.contextRoot + '/cart/' + cartLineId + '/update?count=' + currentCount;
+							
+							// forward it to controller
+
+							window.location.href = updateUrl;
+							
+						
+						}
+
+					}
+
+				})
+
+// -------------------end HERE-------------------------------------------
+
 });
